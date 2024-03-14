@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand d-flex" href="#">
+            <img
+              src="./img/logo.jpeg"
+              alt="Logo"
+              width="50"
+              height="45"
+              class="d-inline-block align-text-top"
+            />
+            <p>Academy</p>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <section class="body">
+      <div class="containerBody">
+        <div class="dashboard">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <!-- Title Dashboard -->
+              <h2 class="text-center">Dashboard</h2>
+              <!-- Home button -->
+              <button
+                style="font-size: 25px; margin-bottom: 20px"
+                class="nav-link active"
+                id="nav-home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-home"
+                type="button"
+                role="tab"
+                aria-controls="nav-home"
+                aria-selected="true"
+              >
+                Danh sách
+              </button>
+              <span>Manage</span>
+
+              <!-- List button -->
+              <button
+                style="font-size: 25px; margin-bottom: 20px"
+                class="nav-link"
+                id="nav-profile-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-profile"
+                type="button"
+                role="tab"
+                aria-controls="nav-profile"
+                aria-selected="false"
+              >
+                IDK
+              </button>
+
+              <!-- Add button -->
+              <button
+                style="font-size: 25px; margin-bottom: 20px"
+                class="nav-link"
+                id="nav-contact-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-contact"
+                type="button"
+                role="tab"
+                aria-controls="nav-contact"
+                aria-selected="false"
+              >
+                Add User
+              </button>
+              <!-- <button
+              class="nav-link"
+              id="nav-disabled-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#nav-disabled"
+              type="button"
+              role="tab"
+              aria-controls="nav-disabled"
+              aria-selected="false"
+              disabled
+            >
+              Disabled
+            </button> -->
+            </div>
+          </nav>
+        </div>
+        <div class="bodyItem">
+          <!-- switch 1 -->
+          <!-- Tab content -->
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="nav-home"
+              role="tabpanel"
+              aria-labelledby="nav-home-tab"
+              tabindex="0"
+            >
+              <div class="table-responsive foodTable">
+                <table class="table table-striped table-sm">
+                  <thead>
+                    <tr class="bg-warning text-white">
+                      <th>ID</th>
+                      <th>Tên</th>
+                      <th>Loại</th>
+                      <th>Giá</th>
+                      <th>Khuyến Mãi</th>
+                      <th>Giá KM</th>
+                      <th>Tình Trạng</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyFood"></tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-profile"
+              role="tabpanel"
+              aria-labelledby="nav-profile-tab"
+              tabindex="0"
+            >
+              <!-- switch 2 -->
+              <!-- Button and modal -->
+              <!-- Button trigger modal -->
+              <button
+                id="addUser"
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Thêm người dùng
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Adding user
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+
+                    <!-- Form through modal -->
+                    <div class="modal-body">
+                      <form action="" id="formUser">
+                        <!-- input họ tên -->
+                        <div class="mb-3">
+                          <label for="hoTen" class="form-label">Họ tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="hoTen"
+                            aria-describedby="helpId"
+                            placeholder="Nhập họ tên"
+                          />
+                        </div>
+                        <!-- input địa chỉ -->
+                        <div class="mb-3">
+                          <label for="diaChi" class="form-label">Địa chỉ</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="diaChi"
+                            aria-describedby="helpId"
+                            placeholder="Nhập địa chỉ"
+                          />
+                        </div>
+                        <!-- input email -->
+                        <div class="mb-3">
+                          <label for="email" class="form-label">Họ tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="email"
+                            aria-describedby="helpId"
+                            placeholder="Nhập email"
+                          />
+                        </div>
+                        <!-- input số ngày làm -->
+                        <div class="mb-3">
+                          <label for="soNgay" class="form-label"
+                            >Số ngày làm</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="soNgay"
+                            aria-describedby="helpId"
+                            placeholder="Nhập số ngày làm"
+                          />
+                        </div>
+                        <!-- input lương theo ngày -->
+                        <div class="mb-3">
+                          <label for="luongNgay" class="form-label"
+                            >Lương theo ngày</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="luongNgay"
+                            aria-describedby="helpId"
+                            placeholder="Nhập lương theo ngày"
+                          />
+                        </div>
+                        <!-- input tên công ty -->
+                        <div class="mb-3">
+                          <label for="congTy" class="form-label">Công ty</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="congTy"
+                            aria-describedby="helpId"
+                            placeholder="Nhập công ty"
+                          />
+                        </div>
+                        <!-- input trị giá hoá đơn -->
+                        <div class="mb-3">
+                          <label for="hoaDon" class="form-label"
+                            >Giá hoá đơn</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="hoaDon"
+                            aria-describedby="helpId"
+                            placeholder="Nhập giá hoá đơn"
+                          />
+                        </div>
+                        <!-- input đánh giá -->
+                        <div class="mb-3">
+                          <label for="rate" class="form-label"></label>
+                          <textarea
+                            class="form-control"
+                            name=""
+                            id="rate"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                        <!-- input toán -->
+                        <div class="mb-3">
+                          <label for="toan" class="form-label">Điểm toán</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="toan"
+                            aria-describedby="helpId"
+                            placeholder="Nhập điểm toán"
+                          />
+                        </div>
+                        <!-- input điểm lý -->
+                        <div class="mb-3">
+                          <label for="ly" class="form-label">Điểm lý</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="ly"
+                            aria-describedby="helpId"
+                            placeholder="Nhập điểm lý"
+                          />
+                        </div>
+                        <!-- input điểm hoá -->
+                        <div class="mb-3">
+                          <label for="hoa" class="form-label">Điểm hoá</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="hoa"
+                            aria-describedby="helpId"
+                            placeholder="Nhập điểm hoá"
+                          />
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        id="close"
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button
+                        type="button"
+                        id="updateUser"
+                        class="btn btn-primary"
+                      >
+                        Cập nhật
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- switch 3 -->
+            <div
+              class="tab-pane fade"
+              id="nav-contact"
+              role="tabpanel"
+              aria-labelledby="nav-contact-tab"
+              tabindex="0"
+            >
+              ...
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-disabled"
+              role="tabpanel"
+              aria-labelledby="nav-disabled-tab"
+              tabindex="0"
+            >
+              ...
+            </div>
+          </div>
+          <!-- Ads and search -->
+          <div class="bodyUtils">
+            <div class="search">
+              <div class="mb-3">
+                <input
+                  style="width: 100%; background-color: grey"
+                  type="text"
+                  class="form-control text-white"
+                  name=""
+                  id="search"
+                  aria-describedby="helpId"
+                  placeholder="Search"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

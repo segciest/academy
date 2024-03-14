@@ -1,0 +1,57 @@
+header {
+  margin-bottom: 20px;
+  nav {
+    div {
+      a {
+        gap: 20px;
+        img {
+        }
+      }
+      p {
+        margin-bottom: unset;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.body {
+  height: 800px;
+  margin: 0 auto;
+  .containerBody {
+    display: grid;
+    grid-template-columns: 0.2fr 0.8fr;
+    gap: 10px;
+    .dashboard {
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      nav {
+        #nav-tab {
+          flex-direction: column;
+          span {
+            text-align: center;
+            font-size: 10px;
+          }
+          button {
+            border: unset;
+          }
+        }
+      }
+    }
+    .bodyItem {
+      width: 100%;
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 0.7fr 0.3fr;
+      .tab-content {
+        width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      .bodyUtils {
+        width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+    }
+  }
+}
