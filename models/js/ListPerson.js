@@ -1,6 +1,8 @@
 export default class ListPerson {
   listPerson = [];
-  addUser = function () {};
+  addUser = function (user) {
+    this.listPerson.push(user);
+  };
   deleteUser = function () {};
   updateUser = function () {};
   sortHoTen = function () {};

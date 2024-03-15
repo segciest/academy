@@ -80,7 +80,7 @@
                 aria-controls="nav-profile"
                 aria-selected="false"
               >
-                IDK
+                Add user
               </button>
 
               <!-- Add button -->
@@ -95,7 +95,7 @@
                 aria-controls="nav-contact"
                 aria-selected="false"
               >
-                Add User
+                IDK
               </button>
               <!-- <button
               class="nav-link"
@@ -162,7 +162,7 @@
                 Thêm người dùng
               </button>
 
-              <!-- Modal -->
+              <!-- Modal form input -->
               <div
                 class="modal fade"
                 id="exampleModal"
@@ -187,6 +187,33 @@
                     <!-- Form through modal -->
                     <div class="modal-body">
                       <form action="" id="formUser">
+                        <!-- select đối tượng -->
+                        <div class="mb-3">
+                          <label for="" class="form-label">City</label>
+                          <select
+                            class="form-select form-select-lg"
+                            name=""
+                            id="select"
+                          >
+                            <option value="">Chọn đối tượng</option>
+
+                            <option value="student">Student</option>
+                            <option value="employee">Employee</option>
+                            <option value="customer">Customer</option>
+                          </select>
+                        </div>
+                        <!-- input id -->
+                        <div class="mb-3">
+                          <label for="hoTen" class="form-label">ID</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name=""
+                            id="id"
+                            aria-describedby="helpId"
+                            placeholder="Nhập id"
+                          />
+                        </div>
                         <!-- input họ tên -->
                         <div class="mb-3">
                           <label for="hoTen" class="form-label">Họ tên</label>
@@ -213,7 +240,7 @@
                         </div>
                         <!-- input email -->
                         <div class="mb-3">
-                          <label for="email" class="form-label">Họ tên</label>
+                          <label for="email" class="form-label">Email</label>
                           <input
                             type="text"
                             class="form-control"
@@ -223,105 +250,115 @@
                             placeholder="Nhập email"
                           />
                         </div>
-                        <!-- input số ngày làm -->
-                        <div class="mb-3">
-                          <label for="soNgay" class="form-label"
-                            >Số ngày làm</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="soNgay"
-                            aria-describedby="helpId"
-                            placeholder="Nhập số ngày làm"
-                          />
+                        <div id="nhanVien" style="display: none">
+                          <!-- input số ngày làm -->
+                          <div class="mb-3 soNgay">
+                            <label for="soNgay" class="form-label"
+                              >Số ngày làm</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="soNgay"
+                              aria-describedby="helpId"
+                              placeholder="Nhập số ngày làm"
+                            />
+                          </div>
+                          <!-- input lương theo ngày -->
+                          <div class="mb-3 luongNgay">
+                            <label for="luongNgay" class="form-label"
+                              >Lương theo ngày</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="luongNgay"
+                              aria-describedby="helpId"
+                              placeholder="Nhập lương theo ngày"
+                            />
+                          </div>
                         </div>
-                        <!-- input lương theo ngày -->
-                        <div class="mb-3">
-                          <label for="luongNgay" class="form-label"
-                            >Lương theo ngày</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="luongNgay"
-                            aria-describedby="helpId"
-                            placeholder="Nhập lương theo ngày"
-                          />
+                        <div id="khachHang" style="display: none">
+                          <!-- input tên công ty -->
+                          <div class="mb-3 congTy">
+                            <label for="congTy" class="form-label"
+                              >Công ty</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="congTy"
+                              aria-describedby="helpId"
+                              placeholder="Nhập công ty"
+                            />
+                          </div>
+                          <!-- input trị giá hoá đơn -->
+                          <div class="mb-3 hoaDon">
+                            <label for="hoaDon" class="form-label"
+                              >Giá hoá đơn</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="hoaDon"
+                              aria-describedby="helpId"
+                              placeholder="Nhập giá hoá đơn"
+                            />
+                          </div>
+                          <!-- input đánh giá -->
+                          <div class="mb-3 rate">
+                            <label for="rate" class="form-label"></label>
+                            <textarea
+                              class="form-control"
+                              name=""
+                              id="rate"
+                              rows="3"
+                            ></textarea>
+                          </div>
                         </div>
-                        <!-- input tên công ty -->
-                        <div class="mb-3">
-                          <label for="congTy" class="form-label">Công ty</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="congTy"
-                            aria-describedby="helpId"
-                            placeholder="Nhập công ty"
-                          />
-                        </div>
-                        <!-- input trị giá hoá đơn -->
-                        <div class="mb-3">
-                          <label for="hoaDon" class="form-label"
-                            >Giá hoá đơn</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="hoaDon"
-                            aria-describedby="helpId"
-                            placeholder="Nhập giá hoá đơn"
-                          />
-                        </div>
-                        <!-- input đánh giá -->
-                        <div class="mb-3">
-                          <label for="rate" class="form-label"></label>
-                          <textarea
-                            class="form-control"
-                            name=""
-                            id="rate"
-                            rows="3"
-                          ></textarea>
-                        </div>
-                        <!-- input toán -->
-                        <div class="mb-3">
-                          <label for="toan" class="form-label">Điểm toán</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="toan"
-                            aria-describedby="helpId"
-                            placeholder="Nhập điểm toán"
-                          />
-                        </div>
-                        <!-- input điểm lý -->
-                        <div class="mb-3">
-                          <label for="ly" class="form-label">Điểm lý</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="ly"
-                            aria-describedby="helpId"
-                            placeholder="Nhập điểm lý"
-                          />
-                        </div>
-                        <!-- input điểm hoá -->
-                        <div class="mb-3">
-                          <label for="hoa" class="form-label">Điểm hoá</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name=""
-                            id="hoa"
-                            aria-describedby="helpId"
-                            placeholder="Nhập điểm hoá"
-                          />
+                        <div id="hocSinh" style="display: none">
+                          <!-- input toán -->
+                          <div class="mb-3 toan">
+                            <label for="toan" class="form-label"
+                              >Điểm toán</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="toan"
+                              aria-describedby="helpId"
+                              placeholder="Nhập điểm toán"
+                            />
+                          </div>
+                          <!-- input điểm lý -->
+                          <div class="mb-3 ly">
+                            <label for="ly" class="form-label">Điểm lý</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="ly"
+                              aria-describedby="helpId"
+                              placeholder="Nhập điểm lý"
+                            />
+                          </div>
+                          <!-- input điểm hoá -->
+                          <div class="mb-3 hoa">
+                            <label for="hoa" class="form-label">Điểm hoá</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              name=""
+                              id="hoa"
+                              aria-describedby="helpId"
+                              placeholder="Nhập điểm hoá"
+                            />
+                          </div>
                         </div>
                       </form>
                     </div>
@@ -333,6 +370,14 @@
                         data-bs-dismiss="modal"
                       >
                         Close
+                      </button>
+                      <button
+                        data-bs-dismiss="modal"
+                        type="button"
+                        id="add"
+                        class="btn btn-primary"
+                      >
+                        Add
                       </button>
                       <button
                         type="button"
@@ -401,5 +446,11 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="./models/js/Person.js"></script>
+    <script type="module" src="./models/js/Student.js"></script>
+    <script type="module" src="./models/js/Employee.js"></script>
+    <script type="module" src="./models/js/Customer.js"></script>
+
+    <script type="module" src="./models/controller/index.js"></script>
   </body>
 </html>
