@@ -3,8 +3,12 @@ export default class ListPerson {
   addUser = function (user) {
     this.listPerson.push(user);
   };
-  deleteUser = function () {};
-  updateUser = function () {};
+  deleteUser = function (index) {
+    this.listPerson.splice(index, 1);
+  };
+  updateUser = function (user, index) {
+    this.ListPerson[index] = user;
+  };
   sortHoTen = function () {};
   sortUser = function () {};
 }

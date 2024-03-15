@@ -168,7 +168,13 @@ const render = (arr = list.listPerson) => {
       <td>${diaChi}</td>
       <td>${email}</td>
       <td>
-      <button id="btn-${id}" type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" >More</button>
+        <button id="btn-${id}" type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" >More</button>
+      </td>
+      <td>
+        <button onclick="deleteUser('${id}')" data-id="${id}" id="btnXoaUser" class="btn btn-danger">Xoá</button>
+        </td>
+      <td>
+        <button onclick="getInfo('${id}')" id="btnSuaMonAn" class="btn btn-success">Sửa</button>
       </td>
     </tr>`;
     console.log("haha");
@@ -210,7 +216,7 @@ const render2 = (arr = list.listPerson) => {
           .getElementById(btn)
           .setAttribute(
             "data-bs-title",
-            `Lương ngày:${luongNgay} Số ngày:${luong}`
+            `Lương ngày:${luongNgay} Số ngày:${soNgay}`
           );
         break;
       case "customer":
@@ -236,4 +242,25 @@ const render2 = (arr = list.listPerson) => {
 };
 render2();
 
-//Ham ko thay chay nhi~
+let deleteUser = (id) => {
+  let index = list.listPerson.findIndex((item, index) => {
+    return item.id == id;
+  });
+  if (index != -1) {
+    list.deleteUser(index);
+    render();
+    render2();
+  }
+};
+window.onload = () => {
+  window.deleteUser = (id) => {
+    console.log(id);
+    deleteUser(id);
+  };
+  window.getDetailFood = (id) => {
+    getDetailFood(id);
+  };
+  window.getInfo = (id) => {
+    getInfo(id);
+  };
+};
