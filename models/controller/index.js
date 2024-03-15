@@ -6,6 +6,8 @@ import ListPerson from "../js/ListPerson.js";
 
 const list = new ListPerson();
 let choose;
+getLocalStorage("listPerson");
+
 // Lấy dữ liệu người dùng
 // function getValue() {
 //   let user = new User();
@@ -61,7 +63,6 @@ a.onchange = function (event) {
   choose = selectedValue;
 };
 // Chọn đối tượng
-let arrInput = document.querySelectorAll("#formUser input");
 
 // console.log(input);
 // let b = user;
@@ -84,34 +85,79 @@ function getLocalStorage(key) {
   }
 }
 
+// Thêm người dùng
 document.getElementById("add").onclick = function () {
   let selectedValue = choose;
+  let arrInput = document.querySelectorAll("#formUser input");
+  console.log(arrInput);
   switch (selectedValue) {
     case "student":
-      var user = new Student();
+      var student = new Student();
       arrInput.forEach((item, index) => {
         let { id, value } = item;
-        user[id] = value;
-        list.addUser(user);
-        document.getElementById("formUser").reset();
+        student[id] = value;
       });
+      list.addUser(student);
+      saveLocalStorage("listPerson", list.listPerson);
+      document.getElementById("formUser").reset();
       break;
     case "employee":
-      var user = new Employee();
+      var employee = new Employee();
       arrInput.forEach((item, index) => {
         let { id, value } = item;
-        user[id] = value;
-        list.addUser(user);
+        employee[id] = value;
       });
+      list.addUser(employee);
+      saveLocalStorage("listPerson", list.listPerson);
+      document.getElementById("formUser").reset();
       break;
     case "customer":
-      var user = new Customer();
+      var customer = new Customer();
       arrInput.forEach((item, index) => {
         let { id, value } = item;
-        user[id] = value;
-        list.addUser(user);
+        customer[id] = value;
       });
+      list.addUser(customer);
+      saveLocalStorage("listPerson", list.listPerson);
+      document.getElementById("formUser").reset();
       break;
   }
   console.log(list);
 };
+
+// Render người dùng
+const render = (arrFood = list.listPerson) => {
+  let content = "";
+  arrFood.forEach((food, index) => {
+    let newFood = new Person();
+    // Object.assign(newFood, food);
+
+    // Dùng spread Operator thay thế object.asign
+    newFood = { ...newFood, ...food };
+    const {
+      hoTen,
+      id,
+      diaChi,
+      email,
+      soNgay,
+      luongNgay,
+      congTy,
+      hoaDon,
+      rate,
+      toan,
+      ly,
+      hoa,
+    } = newFood;
+    content += `
+    <tr>
+      <td>${id}</td>
+      <td>${hoTen}</td>
+      <td>${diaChi}</td>
+      <td>${email}</td>
+    </tr>`;
+  });
+  // let tinhGiaKhuyenMai = food.tinhGiaKhuyenMai();
+
+  document.getElementById("tbody").innerHTML = content;
+};
+render();
