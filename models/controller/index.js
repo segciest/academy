@@ -96,9 +96,13 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         student[id] = value;
+        student["oop"] = selectedValue;
       });
       list.addUser(student);
       saveLocalStorage("listPerson", list.listPerson);
+      render();
+      render2();
+
       document.getElementById("formUser").reset();
       break;
     case "employee":
@@ -106,9 +110,13 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         employee[id] = value;
+        employee["oop"] = selectedValue;
       });
       list.addUser(employee);
       saveLocalStorage("listPerson", list.listPerson);
+      render();
+      render2();
+
       document.getElementById("formUser").reset();
       break;
     case "customer":
@@ -116,9 +124,13 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         customer[id] = value;
+        customer["oop"] = selectedValue;
       });
       list.addUser(customer);
       saveLocalStorage("listPerson", list.listPerson);
+      render();
+      render2();
+
       document.getElementById("formUser").reset();
       break;
   }
@@ -126,14 +138,14 @@ document.getElementById("add").onclick = function () {
 };
 
 // Render người dùng
-const render = (arrFood = list.listPerson) => {
+const render = (arr = list.listPerson) => {
   let content = "";
-  arrFood.forEach((food, index) => {
-    let newFood = new Person();
+  arr.forEach((item, index) => {
+    let newUser = new Person();
     // Object.assign(newFood, food);
 
     // Dùng spread Operator thay thế object.asign
-    newFood = { ...newFood, ...food };
+    newUser = { ...newUser, ...item };
     const {
       hoTen,
       id,
@@ -147,17 +159,81 @@ const render = (arrFood = list.listPerson) => {
       toan,
       ly,
       hoa,
-    } = newFood;
+      oop,
+    } = newUser;
     content += `
-    <tr>
+    <tr id="${id}">
       <td>${id}</td>
       <td>${hoTen}</td>
       <td>${diaChi}</td>
       <td>${email}</td>
+      <td>
+      <button id="btn-${id}" type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" >More</button>
+      </td>
     </tr>`;
+    console.log("haha");
   });
-  // let tinhGiaKhuyenMai = food.tinhGiaKhuyenMai();
 
   document.getElementById("tbody").innerHTML = content;
+  // Khởi tạo Popover cho các nút "More"
+  arr.forEach((item) => {
+    const id = item.id;
+    const btn = document.getElementById(`btn-${id}`);
+    new bootstrap.Popover(btn, {
+      container: "body",
+    });
+  });
 };
 render();
+
+// viết một hàm để render các giá trị riêng của từng đối tượng student, employee, customer bên cạnh tbody đã tạo
+
+const render2 = (arr = list.listPerson) => {
+  console.log("hehe");
+  let content = "";
+  arr.forEach((item) => {
+    let newUser = new Person();
+    newUser = { ...newUser, ...item };
+    const btn = `btn-${item.id}`;
+    console.log(document.getElementById(btn));
+    switch (newUser.oop) {
+      case "student":
+        const { toan, ly, hoa } = newUser;
+        document
+          .getElementById(btn)
+          .setAttribute("data-bs-title", `Toán:${toan} Lý:${ly} Hoá:${hoa}`);
+        break;
+      case "employee":
+        const { soNgay, luongNgay } = newUser;
+
+        document
+          .getElementById(btn)
+          .setAttribute(
+            "data-bs-title",
+            `Lương ngày:${luongNgay} Số ngày:${luong}`
+          );
+        break;
+      case "customer":
+        const { congTy, hoaDon, rate } = newUser;
+        document
+          .getElementById(btn)
+          .setAttribute(
+            "data-bs-title",
+            `Công Ty: ${congTy} Hoá đơn: ${hoaDon} Đánh giá: ${rate}`
+          );
+        break;
+    }
+    console.log(document.getElementById(btn));
+    // Khởi tạo Popover cho các nút "More"
+    arr.forEach((item) => {
+      const id = item.id;
+      const btn = document.getElementById(`btn-${id}`);
+      new bootstrap.Popover(btn, {
+        container: "body",
+      });
+    });
+  });
+};
+render2();
+
+//Ham ko thay chay nhi~
