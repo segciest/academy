@@ -318,10 +318,32 @@ let getDetailUser = (id) => {
     document.getElementById("id").readOnly = true;
   }
 };
-let sortHoTen = () => {
+let sortId = () => {
   console.log("alibaba");
   let arr = [...list.listPerson];
-  arr.sort((a, b) => a.hoTen - b.hoTen);
+  arr.sort((a, b) => a.id - b.id);
+  console.log(arr);
+  render(arr);
+  render2(arr);
+};
+let sortHoTen = () => {
+  list.listPerson.forEach((item, index) => {
+    let a = { ...item };
+    let b = a.hoTen.split("", 1);
+    console.log(b);
+    item["firstLetter"] = b[0];
+    console.log(list);
+  });
+  let arr = [...list.listPerson];
+  arr.sort((a, b) => {
+    if (a.firstLetter < b.firstLetter) {
+      return -1;
+    }
+    if (a.firstLetter > b.firstLetter) {
+      return 1;
+    }
+    return 0;
+  });
   console.log(arr);
   render(arr);
   render2(arr);
@@ -340,5 +362,8 @@ window.onload = () => {
   };
   window.sortHoTen = () => {
     sortHoTen();
+  };
+  window.sortId = () => {
+    sortId();
   };
 };
