@@ -7,18 +7,7 @@ import ListPerson from "../js/ListPerson.js";
 const list = new ListPerson();
 let choose;
 getLocalStorage("listPerson");
-
-// Lấy dữ liệu người dùng
-// function getValue() {
-//   let user = new User();
-//   let arrInput = document.querySelectorAll("#formUser input");
-
-//   arrInput.forEach((item, index) => {
-//     let { id, value } = item;
-//     user[id] = value;
-//   });
-//   return user;
-// }
+var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
 
 // Hàm xử lý sự kiện onchange trả về giá trị đã chọn
 function handleChange(event) {
@@ -31,7 +20,6 @@ function handleChange(event) {
 
 // Lấy tham chiếu đến phần tử select
 let a = document.getElementById("select");
-
 // Thêm sự kiện "onchange" vào phần tử select
 a.onchange = function (event) {
   // Gọi hàm xử lý sự kiện và lấy giá trị trả về
@@ -88,7 +76,9 @@ function getLocalStorage(key) {
 // Thêm người dùng
 document.getElementById("add").onclick = function () {
   let selectedValue = choose;
-  let arrInput = document.querySelectorAll("#formUser input");
+  let arrInput = document.querySelectorAll(
+    "#formUser input,#formUser textarea"
+  );
   console.log(arrInput);
   switch (selectedValue) {
     case "student":
@@ -96,7 +86,7 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         student[id] = value;
-        student["oop"] = selectedValue;
+        student["select"] = selectedValue;
       });
       list.addUser(student);
       saveLocalStorage("listPerson", list.listPerson);
@@ -110,7 +100,7 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         employee[id] = value;
-        employee["oop"] = selectedValue;
+        employee["select"] = selectedValue;
       });
       list.addUser(employee);
       saveLocalStorage("listPerson", list.listPerson);
@@ -124,7 +114,7 @@ document.getElementById("add").onclick = function () {
       arrInput.forEach((item, index) => {
         let { id, value } = item;
         customer[id] = value;
-        customer["oop"] = selectedValue;
+        customer["select"] = selectedValue;
       });
       list.addUser(customer);
       saveLocalStorage("listPerson", list.listPerson);
@@ -159,25 +149,26 @@ const render = (arr = list.listPerson) => {
       toan,
       ly,
       hoa,
-      oop,
+      select,
     } = newUser;
     content += `
     <tr id="${id}">
       <td>${id}</td>
+      <td>${select}</td>
       <td>${hoTen}</td>
       <td>${diaChi}</td>
       <td>${email}</td>
       <td>
-        <button id="btn-${id}" type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" >More</button>
+        <button id="btn-${id}" type="button" class="btn btn-danger" data-bs-toggle="popover" >More</button>
       </td>
       <td>
-        <button onclick="deleteUser('${id}')" data-id="${id}" id="btnXoaUser" class="btn btn-danger">Xoá</button>
+        <button type="button" onclick="deleteUser('${id}')" data-id="${id}" id="btnXoaUser" class="btn btn-danger">Xoá</button>
         </td>
       <td>
-        <button onclick="getInfo('${id}')" id="btnSuaMonAn" class="btn btn-success">Sửa</button>
+        <button type="button" onclick="getDetailUser('${id}')" id="btnSuaMonAn" class="btn btn-success">Sửa</button>
       </td>
     </tr>`;
-    console.log("haha");
+    // console.log("haha");
   });
 
   document.getElementById("tbody").innerHTML = content;
@@ -192,16 +183,14 @@ const render = (arr = list.listPerson) => {
 };
 render();
 
-// viết một hàm để render các giá trị riêng của từng đối tượng student, employee, customer bên cạnh tbody đã tạo
-
+// Hàm render nút more
 const render2 = (arr = list.listPerson) => {
-  console.log("hehe");
-  let content = "";
+  //   console.log("hehe");
+  //   let content = "";
   arr.forEach((item) => {
     let newUser = new Person();
     newUser = { ...newUser, ...item };
     const btn = `btn-${item.id}`;
-    console.log(document.getElementById(btn));
     switch (newUser.oop) {
       case "student":
         const { toan, ly, hoa } = newUser;
@@ -229,7 +218,6 @@ const render2 = (arr = list.listPerson) => {
           );
         break;
     }
-    console.log(document.getElementById(btn));
     // Khởi tạo Popover cho các nút "More"
     arr.forEach((item) => {
       const id = item.id;
@@ -248,8 +236,86 @@ let deleteUser = (id) => {
   });
   if (index != -1) {
     list.deleteUser(index);
+    saveLocalStorage("listPerson", list.listPerson);
     render();
     render2();
+  }
+};
+
+let updateUser = () => {
+  const input = document.querySelectorAll(
+    "#formUser input,#formUser select,#formUser textarea"
+  );
+  let selectedValue = document.getElementById("select").value;
+  switch (selectedValue) {
+    case "customer":
+      var user = new Customer();
+      break;
+    case "student":
+      var user = new Student();
+
+      break;
+    case "employee":
+      var user = new Employee();
+      break;
+  }
+  input.forEach((item, index) => {
+    let { id, value } = item;
+    user[id] = value;
+  });
+  let index = list.listPerson.findIndex((item, index) => {
+    return item.id == user.id;
+  });
+  if (index != -1) {
+    list.updateUser(user, index);
+  }
+  document.getElementById("formUser").reset();
+  myModal.hide();
+  saveLocalStorage("listPerson", list.listPerson);
+  document.getElementById("id").readOnly = false;
+  render();
+  render2();
+};
+
+let getDetailUser = (id) => {
+  console.log("hehe");
+
+  // Đợi cho modal được hiển thị hoàn toàn, sau đó gọi phương thức show()
+
+  myModal.show();
+
+  let user = list.listPerson.find((item, index) => {
+    return item.id == id;
+  });
+  if (user) {
+    let input = document.querySelectorAll("#formUser input, #formUser select");
+    let selectedValue = user.select;
+    switch (selectedValue) {
+      case "student":
+        document.getElementById("hocSinh").style.display = "block";
+        document.getElementById("nhanVien").style.display = "none";
+        document.getElementById("khachHang").style.display = "none";
+        break;
+      case "employee":
+        document.getElementById("nhanVien").style.display = "block";
+        document.getElementById("hocSinh").style.display = "none";
+        document.getElementById("khachHang").style.display = "none";
+
+        break;
+      case "customer":
+        document.getElementById("khachHang").style.display = "block";
+        document.getElementById("nhanVien").style.display = "none";
+        document.getElementById("hocSinh").style.display = "none";
+        break;
+      default:
+        break;
+    }
+    input.forEach((item, index) => {
+      let { id } = item;
+      item.value = user[id];
+    });
+    document.getElementById("select").readOnly = true;
+    document.getElementById("id").readOnly = true;
   }
 };
 window.onload = () => {
@@ -257,10 +323,10 @@ window.onload = () => {
     console.log(id);
     deleteUser(id);
   };
-  window.getDetailFood = (id) => {
-    getDetailFood(id);
+  window.getDetailUser = (id) => {
+    getDetailUser(id);
   };
-  window.getInfo = (id) => {
-    getInfo(id);
+  window.updateUser = () => {
+    updateUser();
   };
 };

@@ -7,7 +7,7 @@ export default class ListPerson {
     this.listPerson.splice(index, 1);
   };
   updateUser = function (user, index) {
-    this.ListPerson[index] = user;
+    this.listPerson[index] = user;
   };
   sortHoTen = function () {};
   sortUser = function () {};
