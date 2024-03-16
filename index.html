@@ -47,15 +47,24 @@
     </header>
     <section class="body">
       <div class="containerBody">
-        <div class="dashboard">
+        <div class="dashboard" style="background-color: #ee82ee">
           <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div
+              style="border-bottom: none; margin: 20px"
+              class="nav nav-tabs"
+              id="nav-tab"
+              role="tablist"
+            >
               <!-- Title Dashboard -->
               <h2 class="text-center">Dashboard</h2>
               <!-- Home button -->
               <button
-                style="font-size: 25px; margin-bottom: 20px"
-                class="nav-link active"
+                style="
+                  font-size: 25px;
+                  margin: 0 20px;
+                  background-color: #afeeee;
+                "
+                class="rounded nav-link active text-dark"
                 id="nav-home-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#nav-home"
@@ -66,12 +75,16 @@
               >
                 Danh sách
               </button>
-              <span>Manage</span>
+              <!-- <span>Manage</span> -->
 
               <!-- List button -->
               <button
-                style="font-size: 25px; margin-bottom: 20px"
-                class="nav-link"
+                style="
+                  font-size: 25px;
+                  margin: 0 20px;
+                  background-color: #6495ed;
+                "
+                class="nav-link rounded"
                 id="nav-profile-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#nav-profile"
@@ -84,32 +97,6 @@
               </button>
 
               <!-- Add button -->
-              <button
-                style="font-size: 25px; margin-bottom: 20px"
-                class="nav-link"
-                id="nav-contact-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-contact"
-                type="button"
-                role="tab"
-                aria-controls="nav-contact"
-                aria-selected="false"
-              >
-                IDK
-              </button>
-              <!-- <button
-              class="nav-link"
-              id="nav-disabled-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-disabled"
-              type="button"
-              role="tab"
-              aria-controls="nav-disabled"
-              aria-selected="false"
-              disabled
-            >
-              Disabled
-            </button> -->
             </div>
           </nav>
         </div>
@@ -144,7 +131,7 @@
               </div>
             </div>
             <div
-              class="tab-pane fade"
+              class="tab-pane fade d-flex justify-content-end"
               id="nav-profile"
               role="tabpanel"
               aria-labelledby="nav-profile-tab"
@@ -154,9 +141,10 @@
               <!-- Button and modal -->
               <!-- Button trigger modal -->
               <button
+                style="margin: auto 0"
                 id="addUser"
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-primary bg-danger-subtle"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -178,22 +166,26 @@
           <!-- Ads and search -->
           <div class="bodyUtils">
             <div class="search">
-              <div class="mb-3">
+              <div
+                class="mb-3 d-flex justify-content-center align-items-center bg-secondary-subtle"
+              >
+                <i class="fa-solid fa-magnifying-glass px-2"></i>
                 <input
+                  oninput="searchUser(event)"
                   style="width: 100%; background-color: grey"
                   type="text"
                   class="form-control text-white"
                   name=""
                   id="search"
                   aria-describedby="helpId"
-                  placeholder="Search"
+                  placeholder="Vui lòng nhập role"
                 />
               </div>
             </div>
             <div class="sortHoTen">
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-warning"
                 id="sortHoten"
                 onclick="sortHoTen()"
               >
@@ -201,7 +193,7 @@
               </button>
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-info"
                 id="sortHoten"
                 onclick="sortId()"
               >
