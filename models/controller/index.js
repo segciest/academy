@@ -318,6 +318,15 @@ let getDetailUser = (id) => {
     document.getElementById("id").readOnly = true;
   }
 };
+let sortHoTen = () => {
+  console.log("alibaba");
+  let arr = [...list.listPerson];
+  arr.sort((a, b) => a.hoTen - b.hoTen);
+  console.log(arr);
+  render(arr);
+  render2(arr);
+};
+
 window.onload = () => {
   window.deleteUser = (id) => {
     console.log(id);
@@ -328,5 +337,8 @@ window.onload = () => {
   };
   window.updateUser = () => {
     updateUser();
+  };
+  window.sortHoTen = () => {
+    sortHoTen();
   };
 };

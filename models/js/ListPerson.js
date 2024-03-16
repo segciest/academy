@@ -9,6 +9,6 @@ export default class ListPerson {
   updateUser = function (user, index) {
     this.listPerson[index] = user;
   };
-  sortHoTen = function () {};
-  sortUser = function () {};
+  // sortHoTen = function () {};
+  // sortUser = function () {};
 }
