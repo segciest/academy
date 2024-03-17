@@ -249,6 +249,7 @@
                   aria-describedby="helpId"
                   placeholder="Nhập id"
                 />
+                <span class="text-danger" id="idNoti"></span>
               </div>
               <!-- input họ tên -->
               <div class="mb-3">
@@ -261,6 +262,7 @@
                   aria-describedby="helpId"
                   placeholder="Nhập họ tên"
                 />
+                <span class="text-danger" id="hoTenNoti"></span>
               </div>
               <!-- input địa chỉ -->
               <div class="mb-3">
@@ -273,6 +275,7 @@
                   aria-describedby="helpId"
                   placeholder="Nhập địa chỉ"
                 />
+                <span class="text-danger" id="diaChiNoti"></span>
               </div>
               <!-- input email -->
               <div class="mb-3">
@@ -285,6 +288,7 @@
                   aria-describedby="helpId"
                   placeholder="Nhập email"
                 />
+                <span class="text-danger" id="emailNoti"></span>
               </div>
               <div id="nhanVien" style="display: none">
                 <!-- input số ngày làm -->
@@ -298,6 +302,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập số ngày làm"
                   />
+                  <span class="text-danger" id="soNgayNoti"></span>
                 </div>
                 <!-- input lương theo ngày -->
                 <div class="mb-3 luongNgay">
@@ -312,6 +317,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập lương theo ngày"
                   />
+                  <span class="text-danger" id="luongNgayNoti"></span>
                 </div>
               </div>
               <div id="khachHang" style="display: none">
@@ -326,6 +332,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập công ty"
                   />
+                  <span class="text-danger" id="congTyNoti"></span>
                 </div>
                 <!-- input trị giá hoá đơn -->
                 <div class="mb-3 hoaDon">
@@ -338,6 +345,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập giá hoá đơn"
                   />
+                  <span class="text-danger" id="hoaDonNoti"></span>
                 </div>
                 <!-- input đánh giá -->
                 <div class="mb-3 rate">
@@ -348,6 +356,7 @@
                     id="rate"
                     rows="3"
                   ></textarea>
+                  <span class="text-danger" id="rateNoti"></span>
                 </div>
               </div>
               <div id="hocSinh" style="display: none">
@@ -362,6 +371,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập điểm toán"
                   />
+                  <span class="text-danger" id="toanNoti"></span>
                 </div>
                 <!-- input điểm lý -->
                 <div class="mb-3 ly">
@@ -374,6 +384,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập điểm lý"
                   />
+                  <span class="text-danger" id="lyNoti"></span>
                 </div>
                 <!-- input điểm hoá -->
                 <div class="mb-3 hoa">
@@ -386,6 +397,7 @@
                     aria-describedby="helpId"
                     placeholder="Nhập điểm hoá"
                   />
+                  <span class="text-danger" id="hoaNoti"></span>
                 </div>
               </div>
             </form>
@@ -399,14 +411,7 @@
             >
               Close
             </button>
-            <button
-              data-bs-dismiss="modal"
-              type="button"
-              id="add"
-              class="btn btn-primary"
-            >
-              Add
-            </button>
+            <button type="button" id="add" class="btn btn-primary">Add</button>
             <button
               onclick="updateUser()"
               type="button"

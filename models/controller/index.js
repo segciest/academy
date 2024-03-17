@@ -3,12 +3,18 @@ import Student from "../js/Student.js";
 import Employee from "../js/Employee.js";
 import Customer from "../js/Customer.js";
 import ListPerson from "../js/ListPerson.js";
+import { checkEmptyValue } from "../../validation/validation.js";
+import { checkEmailValue } from "../../validation/validation.js";
+import { checkNoNumber } from "../../validation/validation.js";
+import { checkNoText } from "../../validation/validation.js";
+// import {check}
 
 const list = new ListPerson();
 let choose;
 getLocalStorage("listPerson");
 var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
 
+// Chọn đối tượng
 // Hàm xử lý sự kiện onchange trả về giá trị đã chọn
 function handleChange(event) {
   // Lấy giá trị đã chọn
@@ -50,11 +56,7 @@ a.onchange = function (event) {
   console.log("Giá trị đã chọn:", selectedValue);
   choose = selectedValue;
 };
-// Chọn đối tượng
 
-// console.log(input);
-// let b = user;
-// console.log(b);
 // Hàm lưu trữ dữ liệu xuống local
 // function save info
 function saveLocalStorage(key, value) {
@@ -73,55 +75,142 @@ function getLocalStorage(key) {
   }
 }
 
-// Thêm người dùng
-document.getElementById("add").onclick = function () {
-  let selectedValue = choose;
+// Get value input
+let getValue = (oop, choose) => {
   let arrInput = document.querySelectorAll(
     "#formUser input,#formUser textarea"
   );
-  console.log(arrInput);
+  arrInput.forEach((item, index) => {
+    let { id, value } = item;
+    oop[id] = value;
+    oop["select"] = choose;
+  });
+  return oop;
+};
+// Hàm check validate
+function checkIn(user) {
+  let isValid = true;
+  //   Check dữ liệu rỗng
+  isValid &= checkEmptyValue(user.id, "idNoti");
+  isValid &= checkEmptyValue(user.hoTen, "hoTenNoti");
+  isValid &= checkEmptyValue(user.diaChi, "diaChiNoti");
+  isValid &= checkEmptyValue(user.email, "emailNoti");
+
+  // Check data theo đối tượng
+  let oop = user.select;
+  switch (oop) {
+    case "student":
+      isValid &= checkEmptyValue(user.toan, "toanNoti");
+      isValid &= checkEmptyValue(user.ly, "lyNoti");
+      isValid &= checkEmptyValue(user.hoa, "hoaNoti");
+      // check không chữ cho trường số
+      isValid &= checkNoText(user.toan, "toanNoti");
+      isValid &= checkNoText(user.ly, "lyNoti");
+      isValid &= checkNoText(user.hoa, "hoaNoti");
+      break;
+    case "employee":
+      isValid &= checkEmptyValue(user.soNgay, "soNgayNoti");
+      isValid &= checkEmptyValue(user.luongNgay, "luongNgayNoti");
+      // check không chữ cho trường số
+      isValid &= checkNoText(user.soNgay, "soNgayNoti");
+      isValid &= checkNoText(user.luongNgay, "luongNgayNoti");
+
+      break;
+    case "customer":
+      isValid &= checkEmptyValue(user.congTy, "congTyNoti");
+      isValid &= checkEmptyValue(user.hoaDon, "hoaDonNoti");
+      isValid &= checkEmptyValue(user.rate, "rateNoti");
+
+      //  check không số cho trường chữ
+      isValid &= checkNoNumer(user.congTy, "congTyNoti");
+      isValid &= checkNoNumber(user.hoaDon, "hoaDonNoti");
+      isValid &= checkNoNumber(user.rate, "rateNoti");
+      break;
+    default:
+      break;
+  }
+
+  //   Check định dạng email
+  isValid &= checkEmailValue(user.email, "emailNoti");
+
+  //   Check định dạng tên
+  isValid &= checkNoNumber(user.hoTen, "hoTenNoti");
+
+  if (isValid) {
+    return user;
+  }
+}
+
+// // Ẩn nút cập nhật
+// document.getElementById("addUser").onclick = () => {
+//   document.getElementById("updateUser").style.display = "none";
+// };
+// Thêm người dùng
+document.getElementById("add").onclick = function () {
+  let selectedValue = choose;
+
   switch (selectedValue) {
     case "student":
       var student = new Student();
-      arrInput.forEach((item, index) => {
-        let { id, value } = item;
-        student[id] = value;
-        student["select"] = selectedValue;
-      });
-      list.addUser(student);
+      student = getValue(student, selectedValue);
+      // list.listPerson.forEach((item, index) => {
+      //   if (item.id == student.id) {
+      //     alert("ID đã tồn tại");
+      //   } else {
+
+      //   }
+      // });
+      let userStudent = checkIn(student);
+      if (userStudent) {
+        list.addUser(userStudent);
+        document.getElementById("formUser").reset();
+        myModal.hide();
+      }
       saveLocalStorage("listPerson", list.listPerson);
       render();
       render2();
 
-      document.getElementById("formUser").reset();
       break;
     case "employee":
       var employee = new Employee();
-      arrInput.forEach((item, index) => {
-        let { id, value } = item;
-        employee[id] = value;
-        employee["select"] = selectedValue;
-      });
-      list.addUser(employee);
+      employee = getValue(employee, selectedValue);
+      // list.listPerson.forEach((item, index) => {
+      //   if (item.id == employee.id) {
+      //     alert("ID đã tồn tại");
+      //   } else {
+      //   }
+      // });
+      let userEmployee = checkIn(employee);
+      if (userEmployee) {
+        list.addUser(userEmployee);
+        document.getElementById("formUser").reset();
+        myModal.hide();
+      }
       saveLocalStorage("listPerson", list.listPerson);
       render();
       render2();
 
-      document.getElementById("formUser").reset();
       break;
     case "customer":
       var customer = new Customer();
-      arrInput.forEach((item, index) => {
-        let { id, value } = item;
-        customer[id] = value;
-        customer["select"] = selectedValue;
-      });
-      list.addUser(customer);
+      customer = getValue(customer, selectedValue);
+      // list.listPerson.forEach((item, index) => {
+      //   if (item.id == customer.id) {
+      //     alert("ID đã tồn tại");
+      //   } else {
+      //   }
+      // });
+      let userCustomer = checkIn(customer);
+      console.log(userCustomer);
+      if (userCustomer) {
+        list.addUser(userCustomer);
+        document.getElementById("formUser").reset();
+        myModal.hide();
+      }
       saveLocalStorage("listPerson", list.listPerson);
       render();
       render2();
 
-      document.getElementById("formUser").reset();
       break;
   }
   console.log(list);
@@ -195,7 +284,7 @@ const render2 = (arr = list.listPerson) => {
     switch (newUser.select) {
       case "student":
         const { toan, ly, hoa } = newUser;
-        console.log("tui học sinh");
+        // console.log("tui học sinh");
         document
           .getElementById(btn)
           .setAttribute(
@@ -251,9 +340,9 @@ let deleteUser = (id) => {
 
 // hàm cập nhật người dùng
 let updateUser = () => {
-  const input = document.querySelectorAll(
-    "#formUser input,#formUser select,#formUser textarea"
-  );
+  // const input = document.querySelectorAll(
+  //   "#formUser input,#formUser select,#formUser textarea"
+  // );
   let selectedValue = document.getElementById("select").value;
   switch (selectedValue) {
     case "customer":
@@ -261,16 +350,12 @@ let updateUser = () => {
       break;
     case "student":
       var user = new Student();
-
       break;
     case "employee":
       var user = new Employee();
       break;
   }
-  input.forEach((item, index) => {
-    let { id, value } = item;
-    user[id] = value;
-  });
+  getValue(user, selectedValue);
   let index = list.listPerson.findIndex((item, index) => {
     return item.id == user.id;
   });
@@ -283,14 +368,15 @@ let updateUser = () => {
   document.getElementById("id").readOnly = false;
   render();
   render2();
+  // document.getElementById("add").style.display = "block";
 };
 
 // lấy dữ liệu ng dùng khi muốn chỉnh sửa
 let getDetailUser = (id) => {
+  // document.getElementById("add").style.display = "none";
   console.log("hehe");
 
   // Đợi cho modal được hiển thị hoàn toàn, sau đó gọi phương thức show()
-
   myModal.show();
 
   let user = list.listPerson.find((item, index) => {
