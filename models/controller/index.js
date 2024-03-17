@@ -3,7 +3,7 @@ import Student from "../js/Student.js";
 import Employee from "../js/Employee.js";
 import Customer from "../js/Customer.js";
 import ListPerson from "../js/ListPerson.js";
-import { checkEmptyValue } from "../../validation/validation.js";
+import { checkEmptyValue, checkIdValid } from "../../validation/validation.js";
 import { checkEmailValue } from "../../validation/validation.js";
 import { checkNoNumber } from "../../validation/validation.js";
 import { checkNoText } from "../../validation/validation.js";
@@ -122,9 +122,12 @@ function checkIn(user) {
       isValid &= checkEmptyValue(user.rate, "rateNoti");
 
       //  check không số cho trường chữ
-      isValid &= checkNoNumer(user.congTy, "congTyNoti");
-      isValid &= checkNoNumber(user.hoaDon, "hoaDonNoti");
+      isValid &= checkNoNumber(user.congTy, "congTyNoti");
       isValid &= checkNoNumber(user.rate, "rateNoti");
+
+      // Check không chữ cho trường số
+      isValid &= checkNoText(user.hoaDon, "hoaDonNoti");
+
       break;
     default:
       break;
@@ -136,6 +139,10 @@ function checkIn(user) {
   //   Check định dạng tên
   isValid &= checkNoNumber(user.hoTen, "hoTenNoti");
 
+  // Check id không tồn tại
+  isValid &= checkIdValid(user.id, "idNoti", list.listPerson);
+  // console.log(validId);
+  console.log(isValid);
   if (isValid) {
     return user;
   }
@@ -160,6 +167,8 @@ document.getElementById("add").onclick = function () {
 
       //   }
       // });
+      // let validId = !list.listPerson.some((item) => item.id === student.id);
+      // console.log(validId);
       let userStudent = checkIn(student);
       if (userStudent) {
         list.addUser(userStudent);

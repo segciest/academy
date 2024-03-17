@@ -54,3 +54,14 @@ export function checkNoText(value, idSpan) {
     return false;
   }
 }
+export function checkIdValid(value, idSpan, arr) {
+  let isValid = arr.some((item) => item.id === value);
+  let eleSpan = document.getElementById(idSpan);
+  if (isValid) {
+    eleSpan.innerHTML = "Vui lòng nhập ID  mới không trùng";
+    return false;
+  } else {
+    eleSpan.innerHTML = "";
+    return true;
+  }
+}
