@@ -139,8 +139,10 @@ function checkIn(user) {
   //   Check định dạng tên
   isValid &= checkNoNumber(user.hoTen, "hoTenNoti");
 
-  // Check id không tồn tại
+  // Check id không tồn tại và không phải chữ
   isValid &= checkIdValid(user.id, "idNoti", list.listPerson);
+  isValid &= checkNoText(user.id, "idNoti");
+
   // console.log(validId);
   console.log(isValid);
   if (isValid) {
